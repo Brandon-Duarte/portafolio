@@ -1,0 +1,327 @@
+@import "tailwindcss";
+
+/* El modo oscuro se controla con la clase .dark en <html>, no con el sistema. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fbfbfd;
+  --bg-soft: #f2f3f8;
+  --surface: #ffffff;
+  --surface-2: #f7f8fc;
+  --border: rgba(15, 23, 42, 0.1);
+  --border-strong: rgba(15, 23, 42, 0.18);
+  --fg: #0b1220;
+  --fg-muted: #545e77;
+  --fg-subtle: #7b849b;
+  --accent: #4f46e5;
+  --accent-fg: #ffffff;
+  --accent-soft: rgba(79, 70, 229, 0.1);
+  --accent-2: #0891b2;
+  --glow-1: rgba(99, 102, 241, 0.22);
+  --glow-2: rgba(8, 145, 178, 0.16);
+  --grid: rgba(15, 23, 42, 0.05);
+}
+
+.dark {
+  --bg: #07080d;
+  --bg-soft: #0b0d15;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --fg: #f2f4f9;
+  --fg-muted: #a2acc4;
+  --fg-subtle: #78829b;
+  --accent: #818cf8;
+  --accent-fg: #08090f;
+  --accent-soft: rgba(129, 140, 248, 0.14);
+  --accent-2: #22d3ee;
+  --glow-1: rgba(99, 102, 241, 0.3);
+  --glow-2: rgba(34, 211, 238, 0.18);
+  --grid: rgba(255, 255, 255, 0.045);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* deja aire bajo el header fijo al saltar a una seccion */
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(115deg, var(--fg) 20%, var(--accent) 60%, var(--accent-2) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .surface-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+  }
+
+  /* borde superior que se ilumina al pasar el cursor por la tarjeta */
+  .card-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-sheen::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+
+  .card-sheen:hover::before {
+    opacity: 1;
+  }
+
+  .grid-backdrop {
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 55%, transparent 100%);
+  }
+}
+
+/* --- Animaciones --- */
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -26px, 0) scale(1.06);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-caret {
+  animation: caret 1.05s step-end infinite;
+}
+
+/* --- Grafo de agentes del hero --- */
+
+/* Los trazos usan pathLength=100, asi el pulso mide lo mismo en cada curva. */
+@keyframes an-flow {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.an-flow {
+  stroke-dasharray: 7 93;
+  animation: an-flow 3.1s linear infinite;
+}
+
+.an-flow-slow {
+  stroke-dasharray: 5 95;
+  animation-duration: 5.4s;
+}
+
+@keyframes an-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70%,
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+.an-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: an-ping 3.8s ease-out infinite;
+}
+
+@keyframes an-core {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.07);
+    opacity: 0.6;
+  }
+}
+
+.an-core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: an-core 4.6s ease-in-out infinite;
+}
+
+@keyframes an-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.an-orbit {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: an-orbit 70s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .an-flow,
+  .an-ping,
+  .an-core,
+  .an-orbit {
+    animation: none;
+  }
+
+  .an-flow {
+    stroke-dasharray: none;
+    stroke-opacity: 0.5;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    animation: none;
+  }
+
+  .animate-float-slow,
+  .animate-caret {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Impresion (pagina /cv) --- */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --fg: #000000;
+    --fg-muted: #333333;
+    --border: #cccccc;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+}
