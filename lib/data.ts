@@ -12,6 +12,12 @@ export type Project = {
   tags: string[];
   repo?: string;
   demo?: string;
+  /**
+   * Captura del proyecto. El archivo va en `public/proyectos/`.
+   * Mientras el campo esté ausente la tarjeta se muestra sin imagen,
+   * así que solo lo agregas cuando el archivo ya existe.
+   */
+  image?: { src: string; alt: string };
 };
 
 export const projects: Project[] = [
@@ -52,6 +58,7 @@ export const projects: Project[] = [
     ],
     tags: ["IA", "Full-stack", "Salud"],
     repo: "https://github.com/Brandon-Duarte/Asistente-de-salud-con-arquitectura-RAG",
+    image: { src: "/proyectos/asistente-rag.png", alt: "Diagrama del pipeline RAG de tres niveles: la consulta pasa por embedding y clasificación por distancia, y deriva a whitelist semántica con FAISS, a recuperación sobre base de conocimiento con LLM, o al guardrail de fuera de alcance" },
   },
   {
     slug: "vulncheck-wazuh",
@@ -80,6 +87,7 @@ export const projects: Project[] = [
     ],
     tags: ["Backend", "DevSecOps", "Datos"],
     repo: "https://github.com/Brandon-Duarte/DevSecOps---Wazuh",
+    image: { src: "/proyectos/vulncheck.png", alt: "Diagrama de VulnCheck: ingesta por streaming desde Wazuh hacia PostgreSQL, comparación entre cargas consecutivas y clasificación de cada hallazgo como nueva, persistente o remediada, junto al pipeline DevSecOps en Jenkins" },
   },
   {
     slug: "toolrent",
@@ -107,6 +115,7 @@ export const projects: Project[] = [
     ],
     tags: ["Backend", "Full-stack"],
     repo: "https://github.com/Brandon-Duarte/Toolrent",
+    image: { src: "/proyectos/toolrent.png", alt: "Diagrama del ciclo de arriendo de ToolRent: Keycloak autoriza la API REST, y el flujo recorre validación de elegibilidad, préstamo activo, devolución, multa automática por mora y kardex de inventario" },
   },
 ];
 
