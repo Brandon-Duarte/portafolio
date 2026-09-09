@@ -17,7 +17,6 @@ import {
 const ROLES = [
   "IA aplicada y arquitecturas RAG",
   "APIs REST en Java, Go y Python",
-  "Optimización multiobjetivo con NSGA-II",
   "Desarrollo full-stack",
 ];
 

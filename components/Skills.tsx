@@ -35,7 +35,7 @@ export default function Skills() {
 
       <Reveal delay={220}>
         <p className="mt-8 text-sm text-subtle">
-          Idiomas: <span className="text-muted">Español (nativo)</span> · Inglés técnico de lectura.
+          Idiomas: <span className="text-muted">Español (nativo)</span> · Inglés.
         </p>
       </Reveal>
     </Section>

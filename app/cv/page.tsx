@@ -167,7 +167,7 @@ export default function CvPage() {
           ))}
           <div className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
             <dt className="text-sm font-medium text-fg">Idiomas</dt>
-            <dd className="text-sm text-muted">Español (nativo), inglés técnico de lectura.</dd>
+            <dd className="text-sm text-muted">Español (nativo), inglés.</dd>
           </div>
         </dl>
       </section>
