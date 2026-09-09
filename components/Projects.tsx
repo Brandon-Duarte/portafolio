@@ -48,6 +48,15 @@ function Highlights({ items }: { items: string[] }) {
 function ProjectCard({ project }: { project: Project }) {
   const featured = Boolean(project.featured);
 
+  // La grilla se ajusta al número de métricas: con 3 columnas fijas,
+  // un proyecto con 2 métricas dejaba una celda vacía visible.
+  const metricCols =
+    project.metrics?.length === 1
+      ? "grid-cols-1"
+      : project.metrics?.length === 2
+        ? "grid-cols-2"
+        : "grid-cols-3";
+
   return (
     <article className="surface-card card-sheen rounded-3xl p-6 sm:p-9">
       <div className="flex flex-wrap items-center gap-3">
@@ -83,7 +92,9 @@ function ProjectCard({ project }: { project: Project }) {
           <p className="mt-5 text-base leading-relaxed text-muted">{project.summary}</p>
 
           {project.metrics && (
-            <dl className="mt-7 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+            <dl
+              className={`mt-7 grid ${metricCols} gap-px overflow-hidden rounded-2xl border border-line bg-line`}
+            >
               {project.metrics.map((metric) => (
                 <div key={metric.label} className="bg-bg px-3 py-4 text-center">
                   <dt className="sr-only">{metric.label}</dt>
