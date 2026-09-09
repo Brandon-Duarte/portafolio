@@ -228,7 +228,7 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "Frontend",
-    items: ["React 19", "Next.js", "Nuxt 3", "TypeScript", "TailwindCSS", "Vuetify", "PWA"],
+    items: ["React 19", "Next.js", "Vue 3", "Nuxt 3", "TypeScript", "TailwindCSS", "Vuetify", "PWA"],
   },
   {
     group: "Datos y DevOps",
