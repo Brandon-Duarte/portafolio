@@ -9,7 +9,7 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/brandon-lee-duarte-miranda",
   // Cambia esto por tu URL real de Vercel despues del primer despliegue.
   url: "https://brandon-duarte.vercel.app",
-  cv: "/CV-Brandon-Duarte.docx",
+  cv: "/CV-Brandon-Duarte.pdf",
   description:
     "Desarrollador full-stack con foco en IA aplicada: arquitecturas RAG, APIs REST en Java, Go y Python, y optimizacion multiobjetivo con algoritmos evolutivos.",
 } as const;
